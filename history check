@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Barwon SIT History Check</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2rem;
+      background-color: #f9f9f9;
+    }
+    label {
+      font-weight: bold;
+      margin-top: 1rem;
+      display: block;
+    }
+    textarea, input, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      margin-bottom: 1rem;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    #output {
+      white-space: pre-wrap;
+      background: white;
+      border: 1px solid #ccc;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Barwon SIT History Check</h1>
+
+  <label for="updated">Updated on:</label>
+  <input type="text" id="updated" placeholder="DD/MM/YYYY" />
+
+  <label for="priority">Priority:</label>
+  <input type="text" id="priority" />
+
+  <label for="auv">Risks AUV (name):</label>
+  <textarea id="auv"></textarea>
+
+  <label for="vs">Risks VS (name):</label>
+  <textarea id="vs"></textarea>
+
+  <label for="cwb">Risks CWB:</label>
+  <textarea id="cwb"></textarea>
+
+  <label for="protective">Protective factors:</label>
+  <textarea id="protective"></textarea>
+
+  <label for="misid1">Is the person at risk of being misidentified as a perpetrator?</label>
+  <select id="misid1">
+    <option value="Yes">Yes</option>
+    <option value="No">No</option>
+    <option value="Unknown">Unknown</option>
+  </select>
+
+  <label for="misid2">Has the person been previously named as a respondent/perpetrator?</label>
+  <select id="misid2">
+    <option value="Yes">Yes</option>
+    <option value="No">No</option>
+    <option value="Unknown">Unknown</option>
+  </select>
+
+  <label for="systems">Current/previous systems and services interventions:</label>
+  <textarea id="systems"></textarea>
+
+  <label for="referrals">Referrals:</label>
+  <textarea id="referrals"></textarea>
+
+  <label for="l17">L17 portal check:</label>
+  <textarea id="l17"></textarea>
+
+  <label for="cbcp">CBCP update:</label>
+  <textarea id="cbcp"></textarea>
+
+  <button onclick="generateText()">Generate Summary</button>
+  <button onclick="copyText()">Copy to Clipboard</button>
+
+  <div id="output"></div>
+
+  <script>
+    function generateText() {
+      const updated = document.getElementById("updated").value;
+      const priority = document.getElementById("priority").value;
+      const auv = document.getElementById("auv").value;
+      const vs = document.getElementById("vs").value;
+      const cwb = document.getElementById("cwb").value;
+      const protective = document.getElementById("protective").value;
+      const misid1 = document.getElementById("misid1").value;
+      const misid2 = document.getElementById("misid2").value;
+      const systems = document.getElementById("systems").value;
+      const referrals = document.getElementById("referrals").value;
+      const l17 = document.getElementById("l17").value;
+      const cbcp = document.getElementById("cbcp").value;
+
+      const result = `Barwon SIT history check – updated on ${updated}
+Priority: ${priority}
+
+Risks AUV: ${auv}
+Risks VS: ${vs}
+Risks CWB: ${cwb}
+Protective factors: ${protective}
+
+Misidentification:
+- Risk of misidentification as a perpetrator: ${misid1}
+- Previously named as a respondent/perpetrator: ${misid2}
+
+Current/previous systems and services interventions:
+${systems}
+
+Referrals:
+${referrals}
+
+L17 portal check:
+${l17}
+
+CBCP update:
+${cbcp}`;
+
+      document.getElementById("output").textContent = result;
+    }
+
+    function copyText() {
+      const text = document.getElementById("output").textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Summary copied to clipboard!");
+      });
+    }
+  </script>
+</body>
+</html>
